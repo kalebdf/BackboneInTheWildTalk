@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Require Backbone.js in the Wild - @HoustonJS on 7/25/2012</title>
+
+        <meta name="description" content="Backbone presentation at Houston JavaScript Users' Group, 7/25/2012">
+        <meta name="author" content="Kaleb Fulgham, @kalebdf">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <link href='css/fonts.css' rel='stylesheet' type='text/css'>
+        <!--link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'-->
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+
+
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+        <style type="text/css">
+          body .reveal .slides {
+            width : 1280px;
+            margin-left : -640px;
+          }
+          .reveal pre code {
+            font-size : 34px;
+            line-height : 38px;
+          }
+          .reveal pre.thin {
+            width: 67%;
+          }
+          .reveal .oneliner {
+            padding-top : 10%;
+            font-size : 1.4em;
+          }
+          .reveal .oneliner h3 {
+            line-height: 1;
+          }
+          body .reveal em {
+            font-style : normal;
+            font-size : 1.2em;
+            color : #ABDDEE;
+          }
+          body .reveal em {
+            text-transform : uppercase;
+            font-weight : bold;
+          }
+
+        .reveal h1 { font-size: 3.8em;  }
+        .reveal h2 { font-size: 2.8em;  }
+        .reveal h3 { font-size: 1.5em;  }
+        .reveal h4 { font-size: 1.25em; }
+
+        </style>
+
+    </head>
+
+<body>
+<div class="reveal">
+
+    <!-- Used to fade in a background when a specific slide state is reached -->
+    <div class="state-background"></div>
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>Backbone.js in the Wild</h1>
+            <h3 class="inverted">Require ['Backbone', 'and', 'More']<br/>One way to organize a pro Backbone App</h3>
+            <br/>
+            <h4><a href="http://houstonjs.com">Houston.JS</a> Meetup - 7/25/2012</h4>
+            <script>
+                // Delicously hacky. Look away.
+                if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+            </script>
+        </section>
+
+        <section>
+            <h1>Kaleb Fulgham</h1>
+            <ul>
+                <li>Application Lead / UI @ <a href="http://prospricing.com">PROS, Inc.</a>
+                <li><a href="http://kalebdf.com/twitter">@kalebdf</a>
+                <li>Coffee lover!
+            </ul>
+        </section>
+
+        <section>
+            <h2>What is Backbone.js?</h2>
+            <a class="image" href="http://backbonejs.org" target="_blank">
+                <img width="451" height="80" src="img/backbone.png">
+            </a>
+
+            <blockquote cite="https://twitter.com/thegdb/status/148293778019581952">
+                Backbone.js gives structure to web applications by providing <em>models</em> with key-value binding and custom events, <em>collections</em> with a rich API of enumerable functions, <em>views</em> with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.
+            </blockquote>
+
+            <aside class="notes">
+                Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you run the speaker notes server.
+            </aside>
+        </section>
+
+        <section data-state="concat-strings-event">
+            <h2>Hold up, what is web programming?</h2>
+
+            <blockquote class="twitter-tweet tw-align-center" cite="https://twitter.com/thegdb/status/148293778019581952"><p>Web programming is the science of coming up with increasingly complicated ways of concatenating strings.</p>&mdash; Greg Brockman (@thegdb) <a href="https://twitter.com/thegdb/status/148293778019581952" data-datetime="2011-12-18T06:49:26+00:00">December 18, 2011</a></blockquote>
+            <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            <div class="concat-strings"></div>
+        </section>
+
+        <section>
+            <section>
+                <h2>Backbone.js, In review</h2>
+
+                <h3>MVC, MVP, MV*...</h3>
+
+                <ol>
+                    <li class="fragment"><em>Models</em> with key-value binding
+                    <li class="fragment"><em>Collections</em> to enumerate
+                    <li class="fragment"><em>Views</em> with declarative event handling
+                    <li class="fragment"><em>Routers</em> provide browser history support
+                    <li class="fragment"><em>Events</em> galore!
+                </ol>
+            </section>
+            <section>
+                <h2>It is not</h2>
+                <h3 class="fragment">An imposing goliath JavaScript<br/> <em>"Skeleton"</em></h3>
+                <h3 class="fragment">A UI widget library<br/> <em>"Body"</em></h3>
+                <img class="fragment" src="img/sencha-large.png"/>
+            </section>
+            <section>
+                <h2>It is simple</h2>
+                <ol>
+                    <li class="fragment">Solid minimal base framework
+                    <li class="fragment">Easy to extend functionality
+                    <li class="fragment">Does not impose UI design constraints
+                </ol>
+            </section>
+            <section class="oneliner">
+                <h2>It is a Backbone!</h2>
+                <img src="img/backbone_pic.png" style="background-color:white"/>
+            </section>
+            <section class="oneliner">
+                <h2>That's all folks.</h2>
+            </section>
+        </section>
+
+        <section data-markdown class="oneliner">
+          ## Beyond a todo list
+        </section>
+
+        <section data-markdown class="oneliner">
+          How can we develop *professional* JavaScript applications with Backbone?
+        </section>
+
+        <section>
+            <section data-markdown class="oneliner">
+              ## TL;DR
+            </section>
+            <section data-markdown class="oneliner">
+              ### Do not write applications in *vanilla* Backbone
+            </section>
+            <section data-markdown class="oneliner">
+              ### If you plan anything non-trivial, do not start with Backbone *alone*
+            </section>
+            <section data-markdown class="oneliner">
+              ### Utilize an application structure and
+              ### set conventions
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Pro Backbone Apps</h2>
+
+                <ol>
+                    <li>Organization
+                    <li>Maintainability
+                    <li>Extensibility
+                    <li>Testing
+                </ol>
+            </section>
+            <section data-markdown class="oneliner">
+                ## But there are so many different ways to do...
+            </section>
+            <section data-markdown class="oneliner">
+                ### Don't be afraid to make *decisions*.
+            </section>
+            <section data-markdown class="oneliner">
+                ### Choose, develop, and ship it!
+            </section>
+        </section>
+
+        <section>
+            <h1>ReBrew</h1>
+            <h3>Discover and rebrew coffee, tea, wine, and beer venues</h3>
+
+            <img src="img/coffeesteam.png"/>
+            <img src="img/coffeesteam.png"/>
+            <img src="img/coffeesteam.png"/>
+            <img src="img/coffeenosteam.png"/>
+            <img src="img/coffeenosteam.png"/>
+
+            <br/>
+
+            <p>Demo application</p>
+        </section>
+
+        <section data-markdown>
+            # 1. Organization
+
+            Backbone does not outline how to organize code
+            No directory structure or strict naming conventions
+            <br/>
+            ### Again, many options
+        </section>
+
+        <section data-markdown>
+            ## Modules are not new
+
+            <br />
+            <pre class="thin"><code contenteditable>function Module () {
+              return {
+                someStuff: { ... },
+                foo: function() { ... }
+              };
+            }
+            </code></pre>
+
+            <br />
+
+            Addy Osmani has helpful notes on the [Module pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript).
+        </section>
+
+        <section data-markdown>
+          ![img/brain.jpg](img/brain.jpg)
+
+          <blockquote cite="https://github.com/SlexAxton/MVCModuleMagicTalk">Your need for modules is directly related to how much of your app you can hold in your head at once.</blockquote>&mdash; Alex Sexton
+        </section>
+
+        <section data-markdown class="oneliner">
+          # App Structure
+        </section>
+
+        <section data-markdown>
+          ## All too common
+
+          <br />
+          <pre class="thin"><code contenteditable>|+ App
+          &nbsp;|- app.js
+           |- controllers.js
+           |- models.js
+           |- views.js
+           |- index.html
+          </code></pre>
+
+          <br />
+
+          ### *Dependency management nightmare*
+        </section>
+
+        <section data-markdown class="oneliner">
+          ## How about a
+          ## *module per file*?
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## Option 1
+            ### Type Directory + Object File
+
+            <br />
+            <pre><code contenteditable>var UserModel = require('Models/User');
+            var UserView  = require('Views/User');
+            </code></pre>
+
+            Which results in this file structure
+
+            <pre class="thin"><code contenteditable>|+ App
+            &nbsp;|+ Models
+              |- User.js
+             |+ Views
+              |- User.js
+            </code></pre>
+
+          </section>
+
+          <section data-markdown>
+            ## Option 2
+            ### Combo
+
+            <br />
+            <pre><code contenteditable>var UserModel = require('UserModel');
+            var UserView  = require('UserView');
+            </code></pre>
+
+            Which results in this file structure
+
+            <pre class="thin"><code contenteditable>|+ App
+            &nbsp;|- UserModel.js
+             |- UserView.js
+            </code></pre>
+          </section>
+
+          <section data-markdown>
+            ## Option 3
+            ### Module Directory + Type File
+
+            <br />
+            <pre><code contenteditable>var UserModel = require('User/Model');
+            var UserView  = require('User/View');
+            </code></pre>
+
+            Which results in this file structure
+
+            <pre class="thin"><code contenteditable>|+ App
+            &nbsp;|+ User
+              |- Model.js
+              |- View.js
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+           <section data-markdown class="oneliner">
+            ## I propose a 4th option...
+          </section>
+          <section data-markdown>
+            ## Option 4
+            ### Module Directory + Type Directory/File + Module File
+
+            <pre><code contenteditable>var UsersModel = require('modules/Users/Model');
+            var UsersView  = require('modules/Users/views/MyView');
+            var Users = require('modules/Users');
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Option 4
+            ### Module Directory + Type Directory/File + Module File
+            Which results in this file structure
+
+            <pre class="thin"><code contenteditable>|+ App
+            &nbsp;|- modules
+            &nbsp;&nbsp;&nbsp;|- Users
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- views
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- MyViews.js
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- Model.js
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- Collection.js
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- Router.js
+            &nbsp;&nbsp;&nbsp;|- Users.js
+            </code></pre>
+          </section>
+        </section>
+
+        <section data-markdown>
+            ## AMD + RequireJS
+            ### Asynchronous Module Definition
+            <pre class="thin"><code contenteditable style="font-size: 18px; margin-top: 20px;"># Libs to require
+define ['backbone'], (Backbone) ->
+    # Create a simple module
+    Venue = Views: {}
+    class Venue.Model extends Backbone.Model
+        defaults:
+            categories: []
+            name: 'Tasty Coffee Cafe'
+    Venue # Return the module for AMD compliance</code></pre>
+        </section>
+
+        <section data-markdown class="oneliner">
+            ## AMD + RequireJS == 'LOVE'
+        </section>
+
+        <section data-markdown class="oneliner">
+          When you no longer *require* a file.
+
+          It is no longer requested or included.
+          <br />
+          #### performance++
+        </section>
+
+        <section data-markdown class="oneliner">
+            [Alex Sexton](https://github.com/SlexAxton) has a lengthy blog post on
+            [his thoughts on AMD](http://alexsexton.com/blog/2012/03/my-thoughts-on-amd/).
+        </section>
+
+        <section data-markdown class="oneliner">
+            Now I have *modular* &amp; *AMD* classes.
+
+            What's next?!
+        </section>
+
+        <section data-markdown class="oneliner">
+            # 2. Maintainability
+        </section>
+
+        <section data-markdown class="oneliner">
+            ## Grunt.js
+        </section>
+        <section data-markdown class="oneliner">
+            ### Node.js powered *task-based* command line build tool for JavaScript projects.
+        </section>
+
+        <section data-markdown>
+            ## Tasks, tasks, and more tasks
+
+            * coffee - Compile CoffeeScript files
+            * concat - Concatenate files.
+            * init - Generate project scaffolding from a predefined template.
+            * lint - Validate files with JSHint.
+            * min - Minify files with UglifyJS.
+            * qunit or jasmine - Run *tests* in a headless PhantomJS instance.
+            * requirejs - Runs the r.js command to process *RequireJS*
+            * server - Start a static web server.
+            * watch - Run predefined tasks whenever watched files change.
+            * etc. (many more Grunt tasks can be found in the npm repo)
+        </section>
+
+         <section data-markdown class="oneliner">
+            ### Grunt takes all code, templates, and CSS and compiles them into deliverables
+        </section>
+
+        <section>
+            <section data-markdown class="oneliner">
+                ## Backbone Boilerplate framework tool
+
+                [grunt-bbb](https://github.com/backbone-boilerplate/grunt-bbb)
+            </section>
+
+            <section data-markdown class="oneliner">
+                ### *bbb* creates a *solid* scaffold for Backbone apps
+            </section>
+
+            <section data-markdown>
+                ## Scaffold Structure
+                ![img/bbb_myapp.png](img/bbb_myapp.png)
+            </section>
+
+            <section data-markdown>
+                ## bbb debug
+                <pre class="thin"><code contenteditable style="font-size: 20px; line-height: 20px;">C:\dev\myapp>bbb debug <--- "Executes debug build target"
+                Running "clean:0" (clean) task
+                Removing: dist/<br/>
+
+                Running "lint:files" (lint) task
+                Lint free.<br/>
+
+                Running "jst:dist/debug/templates.js" (jst) task
+                File "dist/debug/templates.js" created.<br/>
+
+                Running "requirejs" task
+                C:/dev/myapp/dist/debug/require.js
+                ----------------
+                C:/dev/myapp/assets/js/libs/jquery.js
+                C:/dev/myapp/assets/js/libs/lodash.js <--- "Swap with underscore.js"
+                C:/dev/myapp/assets/js/libs/backbone.js
+                C:/dev/myapp/assets/js/plugins/backbone.layoutmanager.js
+                C:/dev/myapp/app/app.js
+                C:/dev/myapp/app/router.js
+                C:/dev/myapp/app/main.js
+                C:/dev/myapp/app/config.js<br/>
+
+                Running "concat:dist" (concat) task
+                File "dist/debug/require.js" created.<br/>
+
+                Done, without errors.</code></pre>
+            </section>
+        </section>
+
+        <section data-markdown class="oneliner">
+            # 3. Extensibility
+        </section>
+
+        <section data-markdown class="oneliner">
+            Again, do *not* use vanilla Backbone
+        </section>
+
+        <section data-markdown class="oneliner">
+            ## Backbone Application Framworks
+        </section>
+
+        <section data-markdown class="oneliner">
+            ### Backbone.Marionette
+
+            Flexible, mature, &amp; comprehensive library for Backbone apps
+
+            [Github Backbone.Marionette](http://derickbailey.github.com/backbone.marionette/)
+        </section>
+
+        <section>
+            <h2>Before Marionette</h2>
+            <pre class="thin"><code contenteditable style="font-size: 20px; line-height: 20px;"># Define the Item View for each Model
+class ItemView extends Backbone.View
+    tagName: 'li'
+    template: _.template $('#item-template').html()
+
+    initialize: ->
+        @model.on 'change', @render, @
+        @model.on 'destroy', @remove, @
+
+    render: ->
+        @$el.html @template( @model.toJSON() )
+        @
+
+    clear: ->
+        @model.clear()</code></pre>
+        </section>
+
+        <section>
+            <h2>Before Marionette</h2>
+            <pre class="thin"><code contenteditable style="font-size: 20px; line-height: 20px;"># Define the List View which creates Item View(s)
+class ListView extends Backbone.View
+    tagName: 'ul'
+    template: _.template $('#list-template').html()
+
+    initialize: ->
+        @collection.on 'add', @addItem, @
+        @collection.on 'remove', @removeItem, @
+        @collection.on 'reset', @render, @
+
+    addItem: -> # Add item to local model-to-view children map
+    removeItem: -> # Remove item from above map
+
+    render: ->
+        @$el.html ''
+        @collection.each (model) ->
+            view = new ItemView model: model
+            @$el.append view.render().el</code></pre>
+        </section>
+
+        <section>
+
+            <section>
+                <h2>With Marionette</h2>
+                <pre class="thin"><code contenteditable style="font-size: 20px; line-height: 20px;">class MItemView extends Backbone.Marionette.ItemView
+    tagName: 'li'
+    template: '#item-template'
+
+class MListView extends Backbone.Marionette.CollectionView
+    itemView: MItemView</code></pre>
+                <br/>
+                <h3>It's that <em>Simple</em></h3>
+            </section>
+
+            <section data-markdown class="oneliner">
+                ### Automatic re-render on change, add, or remove
+            </section>
+            <section data-markdown class="oneliner">
+                ### Built-in memory management. No <em>zombie</em> views
+            </section>
+            <section data-markdown class="oneliner">
+                ### Listen for events triggered at all render stages
+            </section>
+        </section>
+
+        <section data-markdown class="oneliner">
+            ### Chaplin
+
+            Structure, conventions, and a field-tested implementation
+
+            [![img/chaplin.png](img/chaplin.png)](https://github.com/chaplinjs/chaplin)
+        </section>
+        <section data-markdown class="oneliner">
+            ### Thorax (Walmart)
+
+            Structure, modular, form serialization, &amp; opinionated (especially in mobile)
+
+            [Github Thorax](http://walmartlabs.github.com/thorax/)
+        </section>
+
+        <!-- Framework Attributes -->
+        <section>
+            <section data-markdown class="oneliner">
+                ## Framework Key Features
+            </section>
+            <section data-markdown class="oneliner">
+                ## Modularization
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Routing
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Layouts
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Complex Views
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Templates
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Event-driven Architecture
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Memory Management
+            </section>
+        </section>
+
+        <section data-markdown class="oneliner">
+            Mathias from MoviePilot presented <br/>[Application framework plugins on top of Backbone](https://speakerdeck.com/u/molily/p/application-frameworks-on-top-of-backbonejs-talk-at-appsberlinjs)
+        </section>
+
+        <!-- Testing your code -->
+        <section>
+            <section data-markdown class="oneliner">
+                # 4. Testing
+            </section>
+
+            <section data-markdown class="oneliner">
+                There is no excuse. *Test* your code!
+            </section>
+
+            <section data-markdown class="oneliner">
+                ## Jasmine, Mocha, or QUnit
+            </section>
+
+            <section data-markdown class="oneliner">
+                With *modular* code, you are already doing yourself a favor when it comes to test separation.
+            </section>
+        </section>
+
+        <section data-markdown class="oneliner">
+            # DEMO [ReBrew](https://github.com/kalebdf/rebrew)
+        </section>
+
+        <section data-markdown class="oneliner">
+            # Thank you!
+        </section>
+
+        <section>
+            <h1>Questions?</h1>
+            <br/><br/>
+            <h2 class="inverted">We are hiring UI Developers!</h2>
+            <h3 class="inverted">Kaleb Fulgham (<a href="http://kalebdf.com/twitter">@kalebdf</a>)</h3>
+            <h3 class="inverted">kfulgham@prospricing.com</h3>
+        </section>
+
+        <section data-markdown>
+            ## Links &amp; References
+
+
+            * [ReBrew App source code on github](https://github.com/kalebdf/rebrew)
+            * [Backbone.Marionette plugin](https://github.com/derickbailey/backbone.marionette)
+            * [Read more about Backbone &amp; Backbone.Marionette](http://lostechies.com/derickbailey/)
+            * [Application framework plugins on top of Backbone](https://speakerdeck.com/u/molily/p/application-frameworks-on-top-of-backbonejs-talk-at-appsberlinjs)
+            * [MVC Module Magic Talk](https://github.com/SlexAxton/MVCModuleMagicTalk)
+            * [Backbone + Require.js](http://backbonetutorials.com/organizing-backbone-using-modules/)
+            * [Addy O. and JS Design Patterns](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)
+            * [Houston.js Meetup Group](http://houstonjs.com)
+        </section>
+    </div>
+
+    <!-- The navigational controls UI -->
+    <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+    </aside>
+
+    <!-- Presentation progress bar -->
+    <div class="progress"><span></span></div>
+
+</div>
+
+<script src="lib/js/jquery.min.js"></script>
+<script src="lib/js/head.min.js"></script>
+
+<script>
+    // Load reveal.js as well as a classList polyfill if needed
+    head.js( !document.body.classList ? 'lib/js/classList.js' : null )
+        .js( 'js/reveal.js', function() {
+
+        // Parse the query string into a key/value object
+        var query = {};
+        location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+            query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+        } );
+
+        // Fires when a slide with data-state=xyz is activated
+
+        // Append BobbyString over and over again. Joke about string concat.
+        Reveal.addEventListener( 'concat-strings-event', function() {
+            $('.concat-strings').html('').css('font-size', '.4em');
+            var interval = setInterval(function(){
+                $('.concat-strings').append('BobbyString ');
+            }, 100);
+            setTimeout(function(){
+               clearInterval(interval);
+            }, 12000);
+        } );
+
+        // Fires each time a new slide is activated
+        Reveal.addEventListener( 'slidechanged', function( event ) {
+            // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+        } );
+
+        // Loads and Executes Showdown which will translate our sections marked with
+        // the `data-markdown` attribute
+        (function boom(){
+            if (!window.Showdown){
+                var scr = document.createElement('script');
+                scr.onload = boom; // This function name
+                scr.src = 'js/showdown.js';
+                document.body.appendChild(scr);
+                return;
+            }
+
+            [].forEach.call(
+                document.querySelectorAll('[data-markdown]'),
+                function fn(elem){
+
+                    // strip leading whitespace so it isn't evaluated as code
+                    var text      = elem.innerHTML.replace(/\n\s*\n/g,'\n'),
+                    // set indentation level so your markdown can be indented within your HTML
+                    leadingws = text.match(/^\n?(\s*)/)[1].length,
+                    regex     = new RegExp('\\n?\\s{' + leadingws + '}','g'),
+                    md        = text.replace(regex,'\n'),
+                    html      = (new Showdown.converter()).makeHtml(md);
+
+                    // here, have sum HTML
+                    elem.innerHTML = html;
+                });
+
+        }());
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+
+            theme: query.theme || 'default', // default/neon/beige
+            transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+        });
+
+
+    } );
+
+    // Load highlight.js for syntax highlighting of code samples
+    head.js( 'lib/js/highlight.js', function() {
+        hljs.initHighlightingOnLoad();
+    } );
+
+    // If we're runnning the notes server we need to include some additional JS
+    // TODO Is there a better way to determine if we're running the notes server?
+    if( window.location.host === 'localhost:1947' ) {
+        head.js( 'socket.io/socket.io.js', 'plugin/speakernotes/client.js' );
+    }
+</script>
+    </body>
+</html>
