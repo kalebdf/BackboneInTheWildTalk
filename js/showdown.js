@@ -1,4 +1,4 @@
-//
+﻿//
 // showdown.js -- A javascript port of Markdown.
 //
 // Copyright (c) 2007 John Fraser.
